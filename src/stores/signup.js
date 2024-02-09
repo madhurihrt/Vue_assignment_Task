@@ -11,8 +11,9 @@ export const useSignUpStore = defineStore({
         const Auth = getAuth();
         const userCredential = await createUserWithEmailAndPassword(Auth, email, password);
         const user = userCredential.user;
-        alert("User created successfully:", user);
+        localStorage.setItem('userData', user.email)
         router.push('/dashboard');
+        alert("User created successfully", user);
       } catch (e) {
         alert(e);
       }

@@ -12,8 +12,9 @@ export const useSignInStore = defineStore({
         const Auth = getAuth();
         const userCredential = await signInWithEmailAndPassword(Auth, email, password);
         const user = userCredential.user;
-        alert("User signed in successfully:", user);
+        localStorage.setItem('userData', user.email)
         router.push('/dashboard');
+        alert("User log in successfully:", user);
       } catch (e) {
         alert(e);
       }
@@ -22,8 +23,8 @@ export const useSignInStore = defineStore({
         const Auth = getAuth();
         try{
         await signOut(Auth);
+        router.push('/');
         alert("User signout in successfully" ,Auth);
-        router.push('/signin');
         }
         catch(e){
             alert(e)
